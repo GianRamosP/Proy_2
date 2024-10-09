@@ -44,7 +44,9 @@ const Register = () => {
       setSuccessMessage('Registration successful! Please log in.')
       setErrorMessage('')
 
-      navigate('/login')
+      setTimeout(() => {
+        navigate('/login')
+      }, 2000)
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Registration failed')
       setSuccessMessage('')

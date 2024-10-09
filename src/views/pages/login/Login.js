@@ -15,8 +15,12 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { useLocation } from 'react-router-dom'
 
 const Login = () => {
+  const location = useLocation()
+  const successMessage = location.state?.successMessage
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -59,6 +63,7 @@ const Login = () => {
                   <CForm onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <p className="text-body-secondary">Ingresa a tu cuenta</p>
+                    {successMessage && <p className="text-success">{successMessage}</p>}
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
