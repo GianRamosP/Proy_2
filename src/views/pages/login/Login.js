@@ -42,7 +42,7 @@ const Login = () => {
 
       if (response.ok) {
         // Si la respuesta es correcta, navegar a /home
-        navigate('/home')
+        navigate('/welcome-login')
       } else {
         setError(data.message || 'Error al iniciar sesión')
       }
