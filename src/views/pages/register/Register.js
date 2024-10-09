@@ -14,8 +14,10 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -41,6 +43,8 @@ const Register = () => {
       const response = await axios.post('http://localhost:3001/api/register', userData)
       setSuccessMessage('Registration successful! Please log in.')
       setErrorMessage('')
+
+      navigate('/login')
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Registration failed')
       setSuccessMessage('')

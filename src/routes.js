@@ -51,11 +51,13 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
-// const Nutrition = React.lazy(() => import('./views/nutrition/Nutrition'))
-// const Exercises = React.lazy(() => import('./views/exercises/Exercises'))
+const Nutrition = React.lazy(() => import('./views/nutrition/Nutrition'))
+const Exercises = React.lazy(() => import('./views/exercises/Exercises'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/nutrition', name: 'Dietas', element: Nutrition },
+  { path: '/exercises', name: 'Exercises', element: Exercises },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

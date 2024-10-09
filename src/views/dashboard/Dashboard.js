@@ -179,7 +179,7 @@ const Dashboard = () => {
   return (
     <>
       <WidgetsDropdown className="mb-4" />
-      <CCard className="mb-4">
+      {/* <CCard className="mb-4">
         <CCardBody>
           <CRow>
             <CCol sm={5}>
@@ -232,7 +232,7 @@ const Dashboard = () => {
             ))}
           </CRow>
         </CCardFooter>
-      </CCard>
+      </CCard> */}
       <WidgetsBrand className="mb-4" withCharts />
       <CRow>
         <CCol xs>
@@ -323,7 +323,7 @@ const Dashboard = () => {
 
               <br />
 
-              <CTable align="middle" className="mb-0 border" hover responsive>
+              {/* <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead className="text-nowrap">
                   <CTableRow>
                     <CTableHeaderCell className="bg-body-tertiary text-center">
@@ -375,7 +375,7 @@ const Dashboard = () => {
                     </CTableRow>
                   ))}
                 </CTableBody>
-              </CTable>
+              </CTable> */}
             </CCardBody>
           </CCard>
         </CCol>

@@ -44,13 +44,13 @@ const WidgetsDropdown = (props) => {
           color="primary"
           value={
             <>
-              26K{' '}
-              <span className="fs-6 fw-normal">
+              100{' '}
+              {/* <span className="fs-6 fw-normal">
                 (-12.4% <CIcon icon={cilArrowBottom} />)
-              </span>
+              </span> */}
             </>
           }
-          title="Users"
+          title="Usuarios"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="text-white p-0">
@@ -134,13 +134,13 @@ const WidgetsDropdown = (props) => {
           color="info"
           value={
             <>
-              $6.200{' '}
-              <span className="fs-6 fw-normal">
+              12{' '}
+              {/* <span className="fs-6 fw-normal">
                 (40.9% <CIcon icon={cilArrowTop} />)
-              </span>
+              </span> */}
             </>
           }
-          title="Income"
+          title="Alimentos"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="text-white p-0">
@@ -223,13 +223,13 @@ const WidgetsDropdown = (props) => {
           color="warning"
           value={
             <>
-              2.49%{' '}
-              <span className="fs-6 fw-normal">
+              14{' '}
+              {/* <span className="fs-6 fw-normal">
                 (84.7% <CIcon icon={cilArrowTop} />)
-              </span>
+              </span> */}
             </>
           }
-          title="Conversion Rate"
+          title="Ejercicios"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="text-white p-0">
@@ -290,7 +290,7 @@ const WidgetsDropdown = (props) => {
           }
         />
       </CCol>
-      <CCol sm={6} xl={4} xxl={3}>
+      {/* <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="danger"
           value={
@@ -383,7 +383,7 @@ const WidgetsDropdown = (props) => {
             />
           }
         />
-      </CCol>
+      </CCol> */}
     </CRow>
   )
 }
