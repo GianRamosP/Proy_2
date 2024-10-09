@@ -64,18 +64,18 @@ const Dashboard = () => {
   ]
 
   const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
+    { title: 'Lunes', value1: 34, value2: 78 },
+    { title: 'Martes', value1: 56, value2: 94 },
+    { title: 'Miercoles', value1: 12, value2: 67 },
+    { title: 'Jueves', value1: 43, value2: 91 },
+    { title: 'Viernes', value1: 22, value2: 73 },
+    { title: 'Sabado', value1: 53, value2: 82 },
+    { title: 'Domingo', value1: 9, value2: 69 },
   ]
 
   const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
+    { title: 'Masculino', icon: cilUser, value: 53 },
+    { title: 'Femenino', icon: cilUserFemale, value: 43 },
   ]
 
   const progressGroupExample3 = [
@@ -237,23 +237,25 @@ const Dashboard = () => {
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
+            <CCardHeader>Datos de usuarios</CCardHeader>
             <CCardBody>
               <CRow>
                 <CCol xs={12} md={6} xl={6}>
                   <CRow>
                     <CCol xs={6}>
                       <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-body-secondary text-truncate small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
+                        <div className="text-body-secondary text-truncate small">
+                          Nuevos usuarios
+                        </div>
+                        <div className="fs-5 fw-semibold">9</div>
                       </div>
                     </CCol>
                     <CCol xs={6}>
                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                         <div className="text-body-secondary text-truncate small">
-                          Recurring Clients
+                          Usuarios actuales
                         </div>
-                        <div className="fs-5 fw-semibold">22,643</div>
+                        <div className="fs-5 fw-semibold">91</div>
                       </div>
                     </CCol>
                   </CRow>
@@ -271,7 +273,7 @@ const Dashboard = () => {
                   ))}
                 </CCol>
                 <CCol xs={12} md={6} xl={6}>
-                  <CRow>
+                  {/* <CRow>
                     <CCol xs={6}>
                       <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
                         <div className="text-body-secondary text-truncate small">Pageviews</div>
@@ -284,7 +286,7 @@ const Dashboard = () => {
                         <div className="fs-5 fw-semibold">49,123</div>
                       </div>
                     </CCol>
-                  </CRow>
+                  </CRow> */}
 
                   <hr className="mt-0" />
 
@@ -303,7 +305,7 @@ const Dashboard = () => {
 
                   <div className="mb-5"></div>
 
-                  {progressGroupExample3.map((item, index) => (
+                  {/* {progressGroupExample3.map((item, index) => (
                     <div className="progress-group" key={index}>
                       <div className="progress-group-header">
                         <CIcon className="me-2" icon={item.icon} size="lg" />
@@ -317,7 +319,7 @@ const Dashboard = () => {
                         <CProgress thin color="success" value={item.percent} />
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                 </CCol>
               </CRow>
 
