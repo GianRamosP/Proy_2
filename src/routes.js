@@ -1,6 +1,8 @@
 import React from 'react'
 import Welcome from './views/welcome/Welcome'
 import WelcomeLogin from './views/welcome/WelcomeLogin'
+import { element } from 'prop-types'
+import AdminDashboard from './views/admin/AdminDashboard'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -60,6 +62,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/nutrition', name: 'Dietas', element: Nutrition },
   { path: '/exercises', name: 'Exercises', element: Exercises },
+  { path: '/admin', name: 'AdminDashboard', element: AdminDashboard},
   { path: '/welcome', name: 'Welcome', element: Welcome },
   { path: '/welcome-login', name: 'WelcomeLogin', element: WelcomeLogin },
 

@@ -38,6 +38,12 @@ const _nav = [
     to: '/exercises',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Dashboard Admin',
+    to: '/admin',
+    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+  },
   // {
   //   component: CNavTitle,
   //   name: 'Theme',
