@@ -70,6 +70,20 @@ const AdminDashboard = () => {
     }
   }
 
+  const handleDeleteClick = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      setUsers(users.filter((user) => user._id !== userId)) // Actualizar la lista de usuarios
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error)
+    }
+  }
+
   if (userRole !== 'admin') {
     return <p>Acceso denegado</p>
   }
@@ -84,6 +98,7 @@ const AdminDashboard = () => {
           <li key={user._id}>
             {user.name} - {user.email}
             <button onClick={() => handleEditClick(user)}>Editar</button>
+            <button onClick={() => handleDeleteClick(user._id)}>Eliminar</button>
           </li>
         ))}
       </ul>
