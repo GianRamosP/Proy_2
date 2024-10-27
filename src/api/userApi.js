@@ -2,13 +2,14 @@ import axios from 'axios'
 
 const API_URL = 'http://localhost:3001/api'
 
-export const deleteUser = async (userId, token) => {
+export const deleteUser = async (token, userData) => {
   try {
-    const response = await axios.delete(`${API_URL}/admin/users/${userId}`, {
+    const response = await axios.delete(`${API_URL}/admin/users`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
+      data: userData, // Suponiendo que envías el objeto de usuario en el cuerpo de la solicitud
     })
     console.log(response.data.message)
     return response.data
@@ -18,9 +19,9 @@ export const deleteUser = async (userId, token) => {
   }
 }
 
-export const updateUser = async (userId, token, userData) => {
+export const updateUser = async (token, userData) => {
   try {
-    const response = await axios.put(`${API_URL}/admin/users/${userId}`, userData, {
+    const response = await axios.put(`${API_URL}/admin/users`, userData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -36,22 +37,12 @@ export const updateUser = async (userId, token, userData) => {
 
 export const createUser = async (token, userData) => {
   try {
-    const response = await axios.post(
-      `${API_URL}/admin/users`,
-      userData,
-      // {
-      //   name: userData.name,
-      //   email: userData.email,
-      //   password: userData.password,
-      //   role: userData.role,
-      // },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
+    const response = await axios.post(`${API_URL}/admin/users`, userData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
-    )
+    })
     console.log('Usuario creado:', response.data)
     return response.data
   } catch (error) {
