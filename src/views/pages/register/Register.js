@@ -29,7 +29,7 @@ const Register = () => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords don't match")
+      setErrorMessage('Las contraseñas no coinciden')
       return
     }
 
@@ -45,7 +45,7 @@ const Register = () => {
       setErrorMessage('')
 
       // setTimeout(() => {
-      // navigate('/login')
+      // ¿¿navigate('/login')
       navigate('/welcome')
       // }, 2000)
     } catch (error) {
