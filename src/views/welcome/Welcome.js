@@ -1,6 +1,17 @@
+import ImgWelcome from '../../assets/images/exercises/welcome.png'
+
 const Welcome = () => {
   return (
     <div className="container mx-auto p-4">
+      <div className="text-left mb-4">
+        <img
+          src={ImgWelcome}
+          alt="Descripción de la imagen"
+          className="img-fluid"
+          style={{ maxWidth: '150px' }}
+        />
+      </div>
+
       <h1 className="text-2xl font-bold mb-4">¡Registro exitoso! Bienvenido.</h1>
       <h2 className="text-[4px] mb-4">Tenemos algunas recomendaciones iniciales para ti</h2>
       <div className="space-y-6">
