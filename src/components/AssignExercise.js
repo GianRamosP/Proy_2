@@ -8,6 +8,8 @@ const AssignExercise = ({ userId, token }) => {
     exerciseName: '',
     description: '',
   })
+  const [editMode, setEditMode] = useState(false)
+  const [currentExerciseId, setCurrentExerciseId] = useState(null)
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -30,17 +32,53 @@ const AssignExercise = ({ userId, token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        'http://localhost:3001/api/routines',
-        { ...newExercise, user: userId },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      )
-      setExercises([...exercises, response.data])
+      if (editMode) {
+        // Update existing exercise
+        const response = await axios.put(
+          `http://localhost:3001/api/routines/${currentExerciseId}`,
+          { ...newExercise },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        setExercises(
+          exercises.map((exercise) =>
+            exercise._id === currentExerciseId ? response.data : exercise,
+          ),
+        )
+      } else {
+        // Add new exercise
+        const response = await axios.post(
+          'http://localhost:3001/api/routines',
+          { ...newExercise, user: userId },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        setExercises([...exercises, response.data])
+      }
       setNewExercise({ exerciseName: '', description: '' })
+      setEditMode(false)
+      setCurrentExerciseId(null)
     } catch (error) {
-      console.error('Error adding exercise:', error)
+      console.error('Error adding/updating exercise:', error)
+    }
+  }
+
+  const handleEdit = (exercise) => {
+    setNewExercise({ exerciseName: exercise.exerciseName, description: exercise.description })
+    setEditMode(true)
+    setCurrentExerciseId(exercise._id)
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/routines/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      setExercises(exercises.filter((exercise) => exercise._id !== id))
+    } catch (error) {
+      console.error('Error deleting exercise:', error)
     }
   }
 
@@ -77,7 +115,7 @@ const AssignExercise = ({ userId, token }) => {
         </div>
         <div className="col-auto">
           <CButton type="submit" color="primary" className="mb-3">
-            Añadir ejercicio
+            {editMode ? 'Actualizar ejercicio' : 'Añadir ejercicio'}
           </CButton>
         </div>
       </CForm>
@@ -87,6 +125,12 @@ const AssignExercise = ({ userId, token }) => {
             <li key={exercise._id}>
               <h3>{exercise.exerciseName}</h3>
               <p>{exercise.description}</p>
+              {/* <CButton onClick={() => handleEdit(exercise)} color="warning" className="me-2">
+                Editar
+              </CButton> */}
+              <CButton onClick={() => handleDelete(exercise._id)} color="danger">
+                Eliminar
+              </CButton>
             </li>
           ))}
       </ul>
