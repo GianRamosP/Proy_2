@@ -125,9 +125,9 @@ const AssignExercise = ({ userId, token }) => {
             <li key={exercise._id}>
               <h3>{exercise.exerciseName}</h3>
               <p>{exercise.description}</p>
-              {/* <CButton onClick={() => handleEdit(exercise)} color="warning" className="me-2">
+              <CButton onClick={() => handleEdit(exercise)} color="warning" className="me-2">
                 Editar
-              </CButton> */}
+              </CButton>
               <CButton onClick={() => handleDelete(exercise._id)} color="danger">
                 Eliminar
               </CButton>
