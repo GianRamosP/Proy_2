@@ -7,7 +7,7 @@ const UserEditForm = ({ user, onSave, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onSave({ ...user, name, email }) // Llama a la función de guardado con los nuevos datos
+    onSave({ ...user, name, email })
   }
 
   return (

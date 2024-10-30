@@ -30,7 +30,7 @@ const App = () => {
     setColorMode(storedTheme)
   }, [isColorModeSet, setColorMode, storedTheme])
 
-  const token = localStorage.getItem('token') // Obtén el token del localStorage
+  const token = localStorage.getItem('token')
 
   return (
     <AuthProvider>

@@ -48,7 +48,7 @@ const AssignExercise = ({ userId, token }) => {
     <div>
       <h2>Asignar ejercicios</h2>
       <CForm className="row g-3" onSubmit={handleSubmit}>
-        <div className="col-auto">
+        <div className="col-md-4">
           <CFormLabel htmlFor="exerciseName" className="visually-hidden">
             Nombre de ejercicio
           </CFormLabel>
@@ -62,14 +62,14 @@ const AssignExercise = ({ userId, token }) => {
             required
           />
         </div>
-        <div className="col-auto">
+        <div className="col-md-4">
           <CFormLabel htmlFor="exerciseDescription" className="visually-hidden">
-            Descripcion (ej., tiempo, repeticiones)
+            Descripción (ej., tiempo, repeticiones)
           </CFormLabel>
           <CFormTextarea
             name="description"
             id="exerciseDescription"
-            placeholder="Descripcion (ej., tiempo, repeticiones)"
+            placeholder="Descripción (ej., tiempo, repeticiones)"
             value={newExercise.description}
             onChange={handleChange}
             required

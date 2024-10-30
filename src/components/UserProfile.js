@@ -11,13 +11,15 @@ const UserProfile = ({ user, token }) => {
 
   return (
     <div>
-      <h1>{user.name}'s Profile</h1>
-      <CButton
-        color={showAssignExercise ? 'danger' : 'primary'}
-        onClick={() => setShowAssignExercise(!showAssignExercise)}
-      >
-        {showAssignExercise ? 'Cerrar perfil' : 'Abrir perfil'}
-      </CButton>
+      <h1>Perfil de {user.name}</h1>
+      <div className="mb-3">
+        <CButton
+          color={showAssignExercise ? 'danger' : 'primary'}
+          onClick={() => setShowAssignExercise(!showAssignExercise)}
+        >
+          {showAssignExercise ? 'Cerrar perfil' : 'Abrir perfil'}
+        </CButton>
+      </div>
       {showAssignExercise && <AssignExercise userId={user._id} token={token} />}
     </div>
   )

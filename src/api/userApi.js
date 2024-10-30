@@ -9,7 +9,7 @@ export const deleteUser = async (token, userData) => {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      data: userData, // Suponiendo que envías el objeto de usuario en el cuerpo de la solicitud
+      data: userData,
     })
     console.log(response.data.message)
     return response.data

@@ -20,10 +20,10 @@ const CreateUserForm = ({ token, fetchUsers }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError(null) // Resetea el error al enviar un nuevo formulario
+    setError(null)
     try {
       await createUser(token, formData)
-      fetchUsers() // Actualiza la lista de usuarios después de la creación
+      fetchUsers()
       setFormData({ name: '', email: '', password: '', role: 'user' })
     } catch (error) {
       setError(error.response?.data?.message || 'Error creando usuario')
@@ -70,12 +70,7 @@ const CreateUserForm = ({ token, fetchUsers }) => {
         <CFormLabel htmlFor="floatingPassword">Contraseña</CFormLabel>
       </CFormFloating>
       <CFormFloating className="mb-3">
-        <select
-          name="role"
-          value={formData.role}
-          onChange={handleChange}
-          className="form-select" // Asegúrate de que este estilo esté aplicado
-        >
+        <select name="role" value={formData.role} onChange={handleChange} className="form-select">
           <option value="user">Usuario</option>
           <option value="admin">Administrador</option>
         </select>

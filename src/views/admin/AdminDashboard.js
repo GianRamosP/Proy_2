@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import CreateUserForm from './CreateUserForm'
 import UserEditForm from './EditUserForm'
-import UserProfile from '../../components/UserProfile' // Importa el componente UserProfile
+import UserProfile from '../../components/UserProfile'
 
 import {
   CButton,
@@ -17,8 +17,8 @@ import {
 const AdminDashboard = () => {
   const [userRole, setUserRole] = useState(null)
   const [users, setUsers] = useState([])
-  const [selectedUser, setSelectedUser] = useState(null) // Estado para el usuario seleccionado para edición y posiblemente eliminación
-  const [showProfile, setShowProfile] = useState(false) // Estado para mostrar el perfil del usuario
+  const [selectedUser, setSelectedUser] = useState(null)
+  const [showProfile, setShowProfile] = useState(false)
   const token = localStorage.getItem('token')
 
   const fetchUserData = async () => {
@@ -60,8 +60,8 @@ const AdminDashboard = () => {
   }, [token, fetchUsers])
 
   const handleEditClick = (user) => {
-    setSelectedUser(user) // Seleccionar usuario para edición
-    setShowProfile(false) // Ocultar el perfil si está abierto
+    setSelectedUser(user)
+    setShowProfile(false)
   }
 
   const handleSave = async (updatedUser) => {
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
         },
       )
       setUsers(users.map((user) => (user._id === updatedUser._id ? response.data : user)))
-      setSelectedUser(null) // Limpiar el estado de edición
+      setSelectedUser(null)
     } catch (error) {
       console.error('Error al actualizar usuario:', error)
     }
@@ -91,15 +91,15 @@ const AdminDashboard = () => {
           'Content-Type': 'application/json',
         },
       })
-      setUsers(users.filter((user) => user._id !== userId)) // Actualizar la lista de usuarios
+      setUsers(users.filter((user) => user._id !== userId))
     } catch (error) {
       console.error('Error al eliminar usuario:', error)
     }
   }
 
   const handleProfileClick = (user) => {
-    setSelectedUser(user) // Seleccionar usuario para mostrar el perfil
-    setShowProfile(true) // Mostrar el perfil del usuario
+    setSelectedUser(user)
+    setShowProfile(true)
   }
 
   if (userRole !== 'admin') {
@@ -147,9 +147,7 @@ const AdminDashboard = () => {
         </CTableBody>
       </CTable>
 
-      {selectedUser && showProfile && (
-        <UserProfile user={selectedUser} token={token} /> // Mostrar el perfil del usuario seleccionado
-      )}
+      {selectedUser && showProfile && <UserProfile user={selectedUser} token={token} />}
       {selectedUser && !showProfile && (
         <UserEditForm
           user={selectedUser}
