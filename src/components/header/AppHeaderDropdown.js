@@ -30,7 +30,7 @@ const AppHeaderDropdown = () => {
       <CDropdownToggle placement="bottom-end" className="py-0 pe-0" caret={false}>
         <CAvatar src={avatar8} size="md" />
       </CDropdownToggle>
-      {/* <CDropdownMenu className="pt-0" placement="bottom-end">
+      {/*<CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-body-secondary fw-semibold mb-2">Account</CDropdownHeader>
         <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
@@ -89,6 +89,12 @@ const AppHeaderDropdown = () => {
           Lock Account
         </CDropdownItem>
       </CDropdownMenu> */}
+      <CDropdownMenu className="pt-0" placement="bottom-end">
+        <CDropdownItem href="#">
+          <CIcon icon={cilLockLocked} className="me-2" />
+          Cerrar sesión
+        </CDropdownItem>
+      </CDropdownMenu>
     </CDropdown>
   )
 }
