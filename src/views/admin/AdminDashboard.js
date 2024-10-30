@@ -4,6 +4,16 @@ import CreateUserForm from './CreateUserForm'
 import UserEditForm from './EditUserForm'
 import UserProfile from '../../components/UserProfile' // Importa el componente UserProfile
 
+import {
+  CButton,
+  CTable,
+  CTableHead,
+  CTableBody,
+  CTableRow,
+  CTableHeaderCell,
+  CTableDataCell,
+} from '@coreui/react'
+
 const AdminDashboard = () => {
   const [userRole, setUserRole] = useState(null)
   const [users, setUsers] = useState([])
@@ -99,19 +109,44 @@ const AdminDashboard = () => {
   return (
     <div>
       <h1>Panel de Administrador</h1>
-      <CreateUserForm token={token} fetchUsers={fetchUsers} />
+
+      {/* Contenedor para el formulario de creación de usuario */}
+      <div style={{ marginBottom: '20px' }}>
+        <CreateUserForm token={token} fetchUsers={fetchUsers} />
+      </div>
+
       <h2>Lista de Usuarios</h2>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            {user.name} - {user.email}
-            <button onClick={() => handleEditClick(user)}>Editar</button>
-            <button onClick={() => handleDeleteClick(user._id)}>Eliminar</button>
-            <button onClick={() => handleProfileClick(user)}>Perfil</button>{' '}
-            {/* Botón para mostrar el perfil del usuario */}
-          </li>
-        ))}
-      </ul>
+      <CTable>
+        <CTableHead>
+          <CTableRow>
+            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Email</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+          {users.map((user, index) => (
+            <CTableRow key={user._id}>
+              <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+              <CTableDataCell>{user.name}</CTableDataCell>
+              <CTableDataCell>{user.email}</CTableDataCell>
+              <CTableDataCell>
+                <CButton color="warning" onClick={() => handleEditClick(user)}>
+                  Editar
+                </CButton>
+                <CButton color="danger" onClick={() => handleDeleteClick(user._id)}>
+                  Eliminar
+                </CButton>
+                <CButton color="info" onClick={() => handleProfileClick(user)}>
+                  Perfil
+                </CButton>
+              </CTableDataCell>
+            </CTableRow>
+          ))}
+        </CTableBody>
+      </CTable>
+
       {selectedUser && showProfile && (
         <UserProfile user={selectedUser} token={token} /> // Mostrar el perfil del usuario seleccionado
       )}

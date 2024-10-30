@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import AssignExercise from './AssignExercise'
+import { CButton } from '@coreui/react'
 
 const UserProfile = ({ user, token }) => {
   const [showAssignExercise, setShowAssignExercise] = useState(false)
@@ -11,9 +12,12 @@ const UserProfile = ({ user, token }) => {
   return (
     <div>
       <h1>{user.name}'s Profile</h1>
-      <button onClick={() => setShowAssignExercise(!showAssignExercise)}>
-        {showAssignExercise ? 'Close Assign Exercises' : 'Assign Exercises'}
-      </button>
+      <CButton
+        color={showAssignExercise ? 'danger' : 'primary'}
+        onClick={() => setShowAssignExercise(!showAssignExercise)}
+      >
+        {showAssignExercise ? 'Cerrar perfil' : 'Abrir perfil'}
+      </CButton>
       {showAssignExercise && <AssignExercise userId={user._id} token={token} />}
     </div>
   )

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { CButton, CFormInput, CFormLabel, CFormTextarea, CForm } from '@coreui/react'
 
 const AssignExercise = ({ userId, token }) => {
   const [exercises, setExercises] = useState([])
@@ -45,25 +46,41 @@ const AssignExercise = ({ userId, token }) => {
 
   return (
     <div>
-      <h2>Assign Exercises</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="exerciseName"
-          placeholder="Exercise Name"
-          value={newExercise.exerciseName}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description (e.g., time, repetitions)"
-          value={newExercise.description}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Add Exercise</button>
-      </form>
+      <h2>Asignar ejercicios</h2>
+      <CForm className="row g-3" onSubmit={handleSubmit}>
+        <div className="col-auto">
+          <CFormLabel htmlFor="exerciseName" className="visually-hidden">
+            Nombre de ejercicio
+          </CFormLabel>
+          <CFormInput
+            type="text"
+            id="exerciseName"
+            name="exerciseName"
+            placeholder="Nombre de ejercicio"
+            value={newExercise.exerciseName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="col-auto">
+          <CFormLabel htmlFor="exerciseDescription" className="visually-hidden">
+            Descripcion (ej., tiempo, repeticiones)
+          </CFormLabel>
+          <CFormTextarea
+            name="description"
+            id="exerciseDescription"
+            placeholder="Descripcion (ej., tiempo, repeticiones)"
+            value={newExercise.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="col-auto">
+          <CButton type="submit" color="primary" className="mb-3">
+            Añadir ejercicio
+          </CButton>
+        </div>
+      </CForm>
       <ul>
         {Array.isArray(exercises) &&
           exercises.map((exercise) => (

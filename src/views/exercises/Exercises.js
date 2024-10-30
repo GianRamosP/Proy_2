@@ -7,7 +7,6 @@ const Exercises = () => {
   const userId = localStorage.getItem('userId')
 
   useEffect(() => {
-    // Verificar si el token y userId están presentes
     if (!token) {
       console.warn('Token is missing.')
     } else {
@@ -44,8 +43,7 @@ const Exercises = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Exercises</h1>
-      <p className="text-body-secondary float-start">Screen Exercises</p>
+      <h1 className="text-2xl font-bold mb-4">Rutina / ejercicios</h1>
 
       <ul>
         {Array.isArray(exercises) && exercises.length > 0 ? (

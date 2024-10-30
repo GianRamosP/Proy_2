@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { createUser } from '../../api/userApi'
+import { CForm, CFormFloating, CFormInput, CFormLabel, CButton } from '@coreui/react'
 
 const CreateUserForm = ({ token, fetchUsers }) => {
   const [formData, setFormData] = useState({
@@ -30,38 +31,60 @@ const CreateUserForm = ({ token, fetchUsers }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <CForm onSubmit={handleSubmit}>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <input
-        type="text"
-        name="name"
-        placeholder="Nombre"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Contraseña"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-      <select name="role" value={formData.role} onChange={handleChange}>
-        <option value="user">Usuario</option>
-        <option value="admin">Administrador</option>
-      </select>
-      <button type="submit">Crear Usuario</button>
-    </form>
+      <CFormFloating className="mb-3">
+        <CFormInput
+          type="text"
+          name="name"
+          id="floatingName"
+          placeholder="Nombre"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <CFormLabel htmlFor="floatingName">Nombre</CFormLabel>
+      </CFormFloating>
+      <CFormFloating className="mb-3">
+        <CFormInput
+          type="email"
+          name="email"
+          id="floatingEmail"
+          placeholder="name@example.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <CFormLabel htmlFor="floatingEmail">Email</CFormLabel>
+      </CFormFloating>
+      <CFormFloating className="mb-3">
+        <CFormInput
+          type="password"
+          name="password"
+          id="floatingPassword"
+          placeholder="Contraseña"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <CFormLabel htmlFor="floatingPassword">Contraseña</CFormLabel>
+      </CFormFloating>
+      <CFormFloating className="mb-3">
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          className="form-select" // Asegúrate de que este estilo esté aplicado
+        >
+          <option value="user">Usuario</option>
+          <option value="admin">Administrador</option>
+        </select>
+        <CFormLabel htmlFor="floatingRole">Rol</CFormLabel>
+      </CFormFloating>
+      <CButton type="submit" color="primary">
+        Añadir
+      </CButton>
+    </CForm>
   )
 }
 
