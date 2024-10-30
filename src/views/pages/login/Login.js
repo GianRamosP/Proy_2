@@ -23,16 +23,16 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false) // Estado de carga
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    setLoading(true) // Activar estado de carga
+    setLoading(true)
 
     if (!email || !password) {
       setError('Email y contraseña son obligatorios')
-      setLoading(false) // Desactivar estado de carga
+      setLoading(false)
       return
     }
 
@@ -48,11 +48,12 @@ const Login = () => {
       const data = await response.json()
 
       if (response.ok) {
-        // Almacenar el token JWT y los datos del usuario
+        // Almacenar el token JWT y el userId en localStorage
         localStorage.setItem('token', data.token)
-        localStorage.setItem('user', JSON.stringify(data.user))
-        console.log('Token almacenado:', data.token)
-        // Navegar al panel de administración o página de bienvenida
+        localStorage.setItem('userId', data.user._id) // Ajusta si el userId es diferente
+        console.log('Token y userId almacenados:', data.token, data.user._id)
+
+        // Navegar al componente deseado
         navigate('/welcome-login')
       } else {
         setError(data.message || 'Error al iniciar sesión')
@@ -61,7 +62,7 @@ const Login = () => {
       console.error('Error en la autenticación:', err)
       setError('Hubo un problema con el servidor')
     } finally {
-      setLoading(false) // Desactivar estado de carga
+      setLoading(false)
     }
   }
 

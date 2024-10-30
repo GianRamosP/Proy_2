@@ -6,7 +6,7 @@ import { AuthProvider } from './context/AuthContext'
 import './scss/style.scss'
 import PrivateRoute from './components/PrivateRoute'
 
-// Container
+// Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Register = React.lazy(() => import('./views/pages/register/Register'))
@@ -24,13 +24,13 @@ const App = () => {
     if (theme) {
       setColorMode(theme)
     }
-
     if (isColorModeSet()) {
       return
     }
-
     setColorMode(storedTheme)
-  }, [])
+  }, [isColorModeSet, setColorMode, storedTheme])
+
+  const token = localStorage.getItem('token') // Obtén el token del localStorage
 
   return (
     <AuthProvider>
@@ -48,7 +48,6 @@ const App = () => {
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route exact path="/" name="Login" element={<Login />} />
-
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
