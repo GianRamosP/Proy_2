@@ -29,7 +29,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Dietas',
-    to: '/nutrition',
+    to: '/diets',
     icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
   },
   {
@@ -217,12 +217,12 @@ const _nav = [
   //     },
   //   ],
   // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Charts',
-  //   to: '/charts',
-  //   icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  // },
+  {
+    component: CNavItem,
+    name: 'Charts',
+    to: '/charts',
+    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+  },
   // {
   //   component: CNavGroup,
   //   name: 'Icons',

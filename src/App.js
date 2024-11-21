@@ -5,6 +5,7 @@ import { CSpinner, useColorModes } from '@coreui/react'
 import { AuthProvider } from './context/AuthContext'
 import './scss/style.scss'
 import PrivateRoute from './components/PrivateRoute'
+import Exercises from './views/exercises/Exercises'
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
@@ -48,6 +49,7 @@ const App = () => {
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route exact path="/" name="Login" element={<Login />} />
+
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import CreateUserForm from './CreateUserForm'
 import UserEditForm from './EditUserForm'
 import UserProfile from '../../components/UserProfile'
+import AssignDietForm from './AssignDietForm' // Importa el formulario para asignar dieta
 
 import {
   CButton,
@@ -19,6 +20,8 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [showProfile, setShowProfile] = useState(false)
+  const [showAssignDietForm, setShowAssignDietForm] = useState(false) // Estado para mostrar el formulario de asignar dieta
+  const [showEditForm, setShowEditForm] = useState(false) // Estado para mostrar el formulario de edición
   const token = localStorage.getItem('token')
 
   const fetchUserData = async () => {
@@ -61,6 +64,8 @@ const AdminDashboard = () => {
 
   const handleEditClick = (user) => {
     setSelectedUser(user)
+    setShowEditForm(true)
+    setShowAssignDietForm(false)
     setShowProfile(false)
   }
 
@@ -78,6 +83,7 @@ const AdminDashboard = () => {
       )
       setUsers(users.map((user) => (user._id === updatedUser._id ? response.data : user)))
       setSelectedUser(null)
+      setShowEditForm(false)
     } catch (error) {
       console.error('Error al actualizar usuario:', error)
     }
@@ -100,6 +106,15 @@ const AdminDashboard = () => {
   const handleProfileClick = (user) => {
     setSelectedUser(user)
     setShowProfile(true)
+    setShowEditForm(false)
+    setShowAssignDietForm(false)
+  }
+
+  const handleAssignDietClick = (user) => {
+    setSelectedUser(user)
+    setShowAssignDietForm(true)
+    setShowEditForm(false)
+    setShowProfile(false)
   }
 
   if (userRole !== 'admin') {
@@ -141,6 +156,9 @@ const AdminDashboard = () => {
                 <CButton color="info" onClick={() => handleProfileClick(user)}>
                   Perfil
                 </CButton>
+                <CButton color="success" onClick={() => handleAssignDietClick(user)}>
+                  Asignar Dieta
+                </CButton>
               </CTableDataCell>
             </CTableRow>
           ))}
@@ -148,11 +166,18 @@ const AdminDashboard = () => {
       </CTable>
 
       {selectedUser && showProfile && <UserProfile user={selectedUser} token={token} />}
-      {selectedUser && !showProfile && (
+      {selectedUser && showEditForm && (
         <UserEditForm
           user={selectedUser}
           onSave={handleSave}
           onCancel={() => setSelectedUser(null)}
+        />
+      )}
+      {selectedUser && showAssignDietForm && (
+        <AssignDietForm
+          user={selectedUser}
+          token={token}
+          onClose={() => setShowAssignDietForm(false)}
         />
       )}
     </div>

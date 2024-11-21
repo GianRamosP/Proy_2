@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { CFormCheck } from '@coreui/react' // Asegúrate de tener esto importado
+import { CFormCheck } from '@coreui/react'
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([])
@@ -42,10 +42,8 @@ const Exercises = () => {
   const handleCheckboxChange = (exerciseId) => {
     setSelectedExercises((prevSelected) => {
       if (prevSelected.includes(exerciseId)) {
-        // Si el ejercicio ya está seleccionado, lo eliminamos
         return prevSelected.filter((id) => id !== exerciseId)
       } else {
-        // Si no está seleccionado, lo añadimos
         return [...prevSelected, exerciseId]
       }
     })
