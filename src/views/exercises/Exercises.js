@@ -4,7 +4,7 @@ import { CFormCheck } from '@coreui/react'
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([])
-  const [selectedExercises, setSelectedExercises] = useState([]) // Estado para ejercicios seleccionados
+  const [selectedExercises, setSelectedExercises] = useState([])
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
 

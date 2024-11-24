@@ -58,12 +58,14 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const Nutrition = React.lazy(() => import('./views/nutrition/Nutrition'))
 const Diets = React.lazy(() => import('./views/diets/Diets'))
 const Exercises = React.lazy(() => import('./views/exercises/Exercises'))
+const Pay = React.lazy(() => import('./views/pay/Pay'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // { path: '/nutrition', name: 'Dietas', element: Nutrition },
   { path: '/exercises', name: 'Exercises', element: Exercises },
   { path: '/diets', name: 'Diets', element: Diets },
+  { path: '/pay', name: 'Pay', element: Pay },
 
   { path: '/admin', name: 'AdminDashboard', element: AdminDashboard },
   { path: '/welcome', name: 'Welcome', element: Welcome },

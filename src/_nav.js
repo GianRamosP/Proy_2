@@ -44,6 +44,12 @@ const _nav = [
     to: '/admin',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Suscribirse',
+    to: '/pay',
+    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+  },
   // {
   //   component: CNavTitle,
   //   name: 'Theme',
@@ -217,12 +223,12 @@ const _nav = [
   //     },
   //   ],
   // },
-  {
-    component: CNavItem,
-    name: 'Charts',
-    to: '/charts',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Charts',
+  //   to: '/charts',
+  //   icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+  // },
   // {
   //   component: CNavGroup,
   //   name: 'Icons',

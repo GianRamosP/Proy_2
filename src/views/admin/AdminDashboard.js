@@ -154,7 +154,7 @@ const AdminDashboard = () => {
                   Eliminar
                 </CButton>
                 <CButton color="info" onClick={() => handleProfileClick(user)}>
-                  Perfil
+                  Asignar Rutina
                 </CButton>
                 <CButton color="success" onClick={() => handleAssignDietClick(user)}>
                   Asignar Dieta
