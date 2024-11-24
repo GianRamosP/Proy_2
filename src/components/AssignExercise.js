@@ -7,6 +7,7 @@ const AssignExercise = ({ userId, token }) => {
   const [newExercise, setNewExercise] = useState({
     exerciseName: '',
     description: '',
+    videoLink: '',
   })
   const [editMode, setEditMode] = useState(false)
   const [currentExerciseId, setCurrentExerciseId] = useState(null)
@@ -57,7 +58,7 @@ const AssignExercise = ({ userId, token }) => {
         )
         setExercises([...exercises, response.data])
       }
-      setNewExercise({ exerciseName: '', description: '' })
+      setNewExercise({ exerciseName: '', description: '', videoLink: '' }) // Resetear videoLink
       setEditMode(false)
       setCurrentExerciseId(null)
     } catch (error) {
@@ -66,7 +67,11 @@ const AssignExercise = ({ userId, token }) => {
   }
 
   const handleEdit = (exercise) => {
-    setNewExercise({ exerciseName: exercise.exerciseName, description: exercise.description })
+    setNewExercise({
+      exerciseName: exercise.exerciseName,
+      description: exercise.description,
+      videoLink: exercise.videoLink,
+    }) // Añadir videoLink al editar
     setEditMode(true)
     setCurrentExerciseId(exercise._id)
   }
@@ -113,6 +118,19 @@ const AssignExercise = ({ userId, token }) => {
             required
           />
         </div>
+        <div className="col-md-4">
+          <CFormLabel htmlFor="videoLink" className="visually-hidden">
+            Enlace de video (YouTube)
+          </CFormLabel>
+          <CFormInput
+            type="text"
+            id="videoLink"
+            name="videoLink"
+            placeholder="Enlace de video (YouTube)"
+            value={newExercise.videoLink}
+            onChange={handleChange}
+          />
+        </div>
         <div className="col-auto">
           <CButton type="submit" color="primary" className="mb-3">
             {editMode ? 'Actualizar ejercicio' : 'Añadir ejercicio'}
@@ -125,6 +143,7 @@ const AssignExercise = ({ userId, token }) => {
             <li key={exercise._id}>
               <h3>{exercise.exerciseName}</h3>
               <p>{exercise.description}</p>
+
               <CButton onClick={() => handleEdit(exercise)} color="warning" className="me-2">
                 Editar
               </CButton>

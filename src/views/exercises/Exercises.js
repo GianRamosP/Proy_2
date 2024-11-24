@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { CFormCheck } from '@coreui/react'
+import { CFormCheck, CButton } from '@coreui/react'
 
 const Exercises = () => {
   const [exercises, setExercises] = useState([])
   const [selectedExercises, setSelectedExercises] = useState([])
+  const [videoUrl, setVideoUrl] = useState(null)
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
 
@@ -49,6 +50,17 @@ const Exercises = () => {
     })
   }
 
+  const getEmbeddableLink = (videoLink) => {
+    if (!videoLink) return null
+    const videoId = videoLink.split('v=')[1] || videoLink.split('/').pop()
+    return `https://www.youtube.com/embed/${videoId}`
+  }
+
+  const handleVideoButtonClick = (videoLink) => {
+    const embeddableLink = getEmbeddableLink(videoLink)
+    setVideoUrl(embeddableLink)
+  }
+
   if (!userId) {
     return <div>User ID is missing. Please log in again.</div>
   }
@@ -60,20 +72,52 @@ const Exercises = () => {
       <ul style={{ listStyleType: 'none', padding: 0 }}>
         {Array.isArray(exercises) && exercises.length > 0 ? (
           exercises.map((exercise) => (
-            <li key={exercise._id} className="border-b border-gray-300 py-2 flex items-center">
-              <CFormCheck
-                id={exercise._id}
-                label={exercise.exerciseName}
-                checked={selectedExercises.includes(exercise._id)}
-                onChange={() => handleCheckboxChange(exercise._id)}
-              />
-              <p className="ml-4">{exercise.description}</p>
+            <li
+              key={exercise._id}
+              className="border-b border-gray-300 py-2 flex items-center justify-between"
+            >
+              <div className="flex items-center">
+                <CFormCheck
+                  id={exercise._id}
+                  label={exercise.exerciseName}
+                  checked={selectedExercises.includes(exercise._id)}
+                  onChange={() => handleCheckboxChange(exercise._id)}
+                />
+                <p className="ml-4">{exercise.description}</p>
+              </div>
+              {exercise.videoLink && (
+                <CButton
+                  color="info"
+                  className="ml-4"
+                  onClick={() => handleVideoButtonClick(exercise.videoLink)}
+                >
+                  Ver Demostración
+                </CButton>
+              )}
             </li>
           ))
         ) : (
           <p>No hay ejercicios disponibles.</p>
         )}
       </ul>
+
+      {videoUrl && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+          <div className="relative w-full max-w-2xl">
+            <iframe
+              width="100%"
+              height="400"
+              src={videoUrl}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+            <CButton className="absolute top-2 right-2" onClick={() => setVideoUrl(null)}>
+              Cerrar
+            </CButton>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

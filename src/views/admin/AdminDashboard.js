@@ -3,7 +3,7 @@ import axios from 'axios'
 import CreateUserForm from './CreateUserForm'
 import UserEditForm from './EditUserForm'
 import UserProfile from '../../components/UserProfile'
-import AssignDietForm from './AssignDietForm' // Importa el formulario para asignar dieta
+import AssignDietForm from './AssignDietForm'
 
 import {
   CButton,
@@ -20,8 +20,8 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [showProfile, setShowProfile] = useState(false)
-  const [showAssignDietForm, setShowAssignDietForm] = useState(false) // Estado para mostrar el formulario de asignar dieta
-  const [showEditForm, setShowEditForm] = useState(false) // Estado para mostrar el formulario de edición
+  const [showAssignDietForm, setShowAssignDietForm] = useState(false)
+  const [showEditForm, setShowEditForm] = useState(false)
   const token = localStorage.getItem('token')
 
   const fetchUserData = async () => {
