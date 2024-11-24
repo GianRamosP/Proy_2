@@ -9,10 +9,13 @@ import {
   CTableBody,
   CTableDataCell,
 } from '@coreui/react'
+import { CChartBar } from '@coreui/react-chartjs'
 
 const Dashboard = () => {
   const [userId, setUserId] = useState(localStorage.getItem('userId'))
   const [token, setToken] = useState(localStorage.getItem('token'))
+  const [totalUsers, setTotalUsers] = useState(0)
+  const [userDetails, setUserDetails] = useState({ exercisesCount: 0, dietsCount: 0, user: '' })
   const [exercises, setExercises] = useState([])
   const [selectedExercises, setSelectedExercises] = useState([])
   const [dietData, setDietData] = useState([])
@@ -32,9 +35,22 @@ const Dashboard = () => {
         console.log('User ID found:', userId)
       }
 
-      console.log(`Fetching data for user ID: ${userId}`)
-
       try {
+        // Fetch total users
+        const usersResponse = await axios.get('http://localhost:3001/api/total-users', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        setTotalUsers(usersResponse.data.totalUsers)
+
+        // Fetch user details
+        const userDetailsResponse = await axios.get(
+          `http://localhost:3001/api/user-details/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        setUserDetails(userDetailsResponse.data)
+
         // Fetch exercises
         const exerciseResponse = await axios.get(`http://localhost:3001/api/routines/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -54,7 +70,7 @@ const Dashboard = () => {
     }
 
     fetchData()
-  }, [userId, token])
+  }, [token, userId])
 
   const handleCheckboxChange = (exerciseId) => {
     setSelectedExercises((prevSelected) => {
@@ -66,6 +82,17 @@ const Dashboard = () => {
     })
   }
 
+  const userChartData = {
+    labels: ['Cantidad de Usuarios', 'Ejercicios', 'Alimentos'],
+    datasets: [
+      {
+        label: 'Cantidad',
+        backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+        data: [totalUsers, userDetails.exercisesCount, userDetails.dietsCount],
+      },
+    ],
+  }
+
   if (!userId) {
     return <div>User ID is missing. Please log in again.</div>
   }
@@ -73,6 +100,27 @@ const Dashboard = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Reporte Final</h1>
+
+      <h2 className="text-xl font-semibold mt-4">Cantidad de Usuarios, Ejercicios y Alimentos</h2>
+      <CChartBar data={userChartData} />
+
+      <h2 className="text-xl font-semibold mt-4">Detalles del Usuario</h2>
+      <CTable hover striped>
+        <CTableHead>
+          <CTableRow>
+            <CTableHeaderCell>Usuario</CTableHeaderCell>
+            <CTableHeaderCell>Cantidad de Ejercicios</CTableHeaderCell>
+            <CTableHeaderCell>Cantidad de Alimentos</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+          <CTableRow>
+            <CTableDataCell>{userDetails.user}</CTableDataCell>
+            <CTableDataCell>{userDetails.exercisesCount}</CTableDataCell>
+            <CTableDataCell>{userDetails.dietsCount}</CTableDataCell>
+          </CTableRow>
+        </CTableBody>
+      </CTable>
 
       <h2 className="text-xl font-semibold mt-4">Rutina / Ejercicios</h2>
       <CTable hover striped>
