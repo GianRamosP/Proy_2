@@ -15,6 +15,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import '../../../scss/_custom.scss'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -41,21 +42,21 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://localhost:3001/api/register', userData)
-      setSuccessMessage('Registration successful! Please log in.')
+      setSuccessMessage('¡Registro exitoso! Por favor, inicia sesión.')
       setErrorMessage('')
 
       // setTimeout(() => {
-      // ¿¿navigate('/login')
+      // navigate('/login')
       navigate('/welcome')
       // }, 2000)
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || 'Registration failed')
+      setErrorMessage(error.response?.data?.message || 'Falló el registro')
       setSuccessMessage('')
     }
   }
 
   return (
-    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-image-register d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={9} lg={7} xl={6}>
